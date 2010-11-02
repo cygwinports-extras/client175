@@ -1,0 +1,27 @@
+inherit python
+
+DESCRIPTION="Web client for the Music Player Daemon"
+HOMEPAGE="http://code.google.com/p/client175/"
+SRC_URI="http://client175.googlecode.com/files/${PN}_${PV}.tar.gz"
+SRC_DIR="${PN}_${PV}"
+
+PATCH_URI="0.3-libmodplug.patch"
+
+src_compile() { :; }
+
+src_install() {
+	cd ${S}
+	insinto /usr/share/${PN}
+	# BeautifulSoup.py is a copy, but mpd.py is modified
+	doins covers.py mpd*.py server.py site.conf
+	# cherrypy and mutagen are copies
+	cp -r metadata/ static/ ${D}/usr/share/${PN}/
+
+	python_optimize /usr/share/${PN}
+	make_etc_defaults /usr/share/${PN}/*.conf
+
+	dodir /usr/bin
+	echo -e "#! /bin/sh\nexec python /usr/share/${PN}/server.py" > ${D}/usr/bin/client175-server
+	echo -e "#! /bin/sh\nexec xdg-open http://127.0.0.1:8080/static/index.html" > ${D}/usr/bin/client175
+	chmod +x ${D}/usr/bin/*
+}

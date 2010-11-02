@@ -1,0 +1,13 @@
+--- origsrc/client175_0.3/metadata/mod.py	2010-05-01 14:15:15.000000000 -0500
++++ src/client175_0.3/metadata/mod.py	2010-11-02 15:36:55.725582400 -0500
+@@ -32,8 +32,8 @@ from mutagen import FileType
+ import os
+ 
+ try:
+-    import ctypes
+-    modplug = ctypes.cdll.LoadLibrary("libmodplug.so.0")
++    import ctypes, ctypes.util
++    modplug = ctypes.cdll.LoadLibrary(ctypes.util.find_library("modplug"))
+     modplug.ModPlug_Load.restype = ctypes.c_void_p
+     modplug.ModPlug_Load.argtypes = (ctypes.c_void_p, ctypes.c_int)
+     modplug.ModPlug_GetName.restype = ctypes.c_char_p

@@ -3,7 +3,7 @@ inherit python
 DESCRIPTION="Web client for the Music Player Daemon"
 HOMEPAGE="http://code.google.com/p/client175/"
 SRC_URI="http://client175.googlecode.com/files/${PN}_${PV}.tar.gz"
-SRC_DIR="${PN}_${PV}"
+SRC_DIR=${PN}
 
 PATCH_URI="0.3-libmodplug.patch"
 
@@ -12,7 +12,7 @@ src_compile() { :; }
 src_install() {
 	cd ${S}
 	insinto /usr/share/${PN}
-	# BeautifulSoup.py is a copy, but mpd.py is modified
+	# BeautifulSoup.py and lyricwiki.py are copies, but mpd.py is modified
 	doins covers.py mpd*.py server.py site.conf
 	# cherrypy and mutagen are copies
 	cp -r metadata/ static/ ${D}/usr/share/${PN}/

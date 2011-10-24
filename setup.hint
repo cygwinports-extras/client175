@@ -1,5 +1,5 @@
 category: Audio Web
-requires: libmodplug0 mpd python python-beautifulsoup python-cherrypy python-metagen xdg-utils
+requires: libmodplug-devel mpd python python-beautifulsoup python-cherrypy python-lyricwiki python-metagen xdg-utils
 sdesc: "MPD web client"
 ldesc: "Client175 is a full featured MPD web client that provides all of 
 the functionality of a desktop application in your favorite web browser. 
